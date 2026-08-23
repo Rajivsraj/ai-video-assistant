@@ -1,0 +1,11 @@
+.env
+.idea
+.venv
+.venv312
+*/__pycache__/
+*/__pycache__/*
+downloads/*
+
+__pycache__/
+*.pyc
+downloads/*.wav
