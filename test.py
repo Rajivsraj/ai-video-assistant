@@ -1,3 +1,5 @@
+import os
+
 from dotenv import load_dotenv
 load_dotenv()
 from utils.audio_processor import process_input
@@ -6,11 +8,15 @@ from core.summerizer import summarize, generate_title
 from core.extractor import extract_action_items, extract_key_decision, extract_questions
 
 
+print("KEY LOADED:", os.getenv("SARVAM_API_KEY"))
+print("CWD: ", os.getcwd())
 
-source = "https://www.youtube.com/watch?v=UMYtqHptYvA"
+
+source = "https://www.youtube.com/watch?v=b9OVPcW1gfY"
 # source = "https://www.youtube.com/watch?v=5sLYAQS9sWQ"
 # source = "https://www.youtube.com/watch?v=HZW_97N4sk0"      # hinglish
 language = "english"
+
 
 chunks = process_input(source)
 
@@ -30,6 +36,35 @@ print(f"TITLE: {title}")
 print("\n" + "="*60)
 print("\n SUMMARY")
 print(summary)
+
+
+action_items = extract_action_items(transcript)
+decision = extract_key_decision(transcript)
+questions = extract_questions(transcript)
+
+
+print("\n" + "="*60)
+print(f"ACTION ITEMS")
+print("\n" + "="*60)
+print(action_items)
+
+
+print("\n" + "="*60)
+print(f"KEY DECISIONS")
+print("\n" + "="*60)
+print(decision)
+
+
+print("\n" + "="*60)
+print(f"OPEN QUESTIONS")
+print("\n" + "="*60)
+print(questions)
+
+
+
+
+
+
 
 
 

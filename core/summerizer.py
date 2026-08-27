@@ -35,7 +35,7 @@ def split_transcript(transcript: str) -> list:
 def summarize(transcript: str) -> str:
     llm = get_mistral_llm()
 
-    map_prompt = ChatPromptTemplate(
+    map_prompt = ChatPromptTemplate.from_messages(
         [
             ("system", "Summarize this portion of a meeting transcript preciously"),
             ("human", "{text}")
@@ -48,13 +48,13 @@ def summarize(transcript: str) -> str:
     chunk_summaries = [map_chain.invoke({"text": chunk}) for chunk in chunks]
     combined = "\n\n".join(chunk_summaries)
 
-    combined_prompt = ChatPromptTemplate([
+    combined_prompt = ChatPromptTemplate.from_messages([
         ("system", "You're an expert meeting summarizer. Combine these partial summaries into one final professional meeting in bullet points"),
         ("human", "{text}")
     ])
 
     combined_chain = (
-        RunnablePassthrough() | RunnableLambda(lambda x: {"text":x}) | combined_prompt | llm | StrOutputParser
+        RunnablePassthrough() | RunnableLambda(lambda x: {"text":x}) | combined_prompt | llm | StrOutputParser()
     )
 
     return combined_chain.invoke(combined)
@@ -65,11 +65,11 @@ def generate_title(transcript: str) -> str:
 
     title_chain = (
         RunnablePassthrough() | RunnableLambda(lambda x: {"text": x}) |
-        ChatPromptTemplate([
+        ChatPromptTemplate.from_messages([
             ("system", "Based on meeting transcript generate a short professional meeting title. Return title only nothing else."),
             ("human", "{text}")
         ]) | llm | StrOutputParser()
     )
 
-    return title_chain.invoke(transcript[:200])
+    return title_chain.invoke(transcript[:2000])
 

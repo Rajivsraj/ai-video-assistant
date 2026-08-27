@@ -1,6 +1,13 @@
+I have used open source api keys, to run this project you would need those, so to get those go to images/output/img_key.png convert it in text, becuase git not allowing to push keys
+
 # ai-video-assistant
-![0_img.png](images/project_flow/0_img.png)
-![1_img.png](images/project_flow/1_img.png)
+
+![1.png](images/output/1.png)
+![2.png](images/output/2.png)
+![3.png](images/output/3.png)
+![4.png](images/output/4.png)
+![5.png](images/output/5.png)
+![6.png](images/output/6.png)
 
 
 [//]: # (Packages)
@@ -40,10 +47,7 @@ Chunk wav audio (10 min per chunk)
         |
 AI Transcription (core/transcriber.py) translating audio to text
         |
-summerize
+Extractor
+        |
+Summerizer 
 
-
-
-
-E:\Rajiv_Workspace\My_Development\Practice\GenAI\sheriyansYT\Projects\ai-video-assistant\.venv312\Lib\site-packages\whisper\transcribe.py:132: UserWarning: FP16 is not supported on CPU; using FP32 instead
-  warnings.warn("FP16 is not supported on CPU; using FP32 instead")
